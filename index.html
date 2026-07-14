@@ -255,7 +255,7 @@
     border:1.5px solid var(--ink);background:#fff;cursor:pointer;
     transition:all .15s ease;
   }
-  .tab-btn.active{background:var(--ink);color:#fff;}
+  .tab-btn.active{background:var(--ink);color:#fff;text-transform:uppercase;}
   .grid-cat{display:none;margin-top:30px;}
   .grid-cat.active{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
   @media(max-width:760px){.grid-cat.active{grid-template-columns:repeat(2,1fr);}}
@@ -326,8 +326,7 @@
   /* Lightbox */
   .lightbox{
     display:none;position:fixed;top:0;left:0;width:100%;height:100%;
-    background:linear-gradient(135deg,rgba(91,33,214,0.15) 0%,rgba(139,92,246,0.1) 50%,rgba(215,255,62,0.08) 100%);
-    backdrop-filter:blur(10px);
+    background:linear-gradient(135deg,rgba(91,33,214,0.92) 0%,rgba(139,92,246,0.88) 50%,rgba(215,255,62,0.85) 100%);
     z-index:1000;overflow-y:auto;
   }
   .lightbox.active{display:block;}
@@ -388,12 +387,13 @@
   }
   .lightbox-phones{
     position:relative;z-index:1;
-    display:flex;gap:24px;padding:20px;
+    display:flex;gap:24px;padding:40px 20px;
     overflow-x:auto;overflow-y:visible;
     scroll-behavior:smooth;
     max-width:100%;
     -webkit-overflow-scrolling:touch;
     scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.3) transparent;
+    align-items:center;
   }
   .lightbox-phones::-webkit-scrollbar{height:10px;}
   .lightbox-phones::-webkit-scrollbar-track{background:transparent;}
@@ -419,11 +419,12 @@
     to{opacity:1;transform:translateY(0);}
   }
   .lightbox-phone{
-    position:relative;width:100%;padding-bottom:200%;
+    position:relative;width:100%;padding-bottom:180%;
     background:linear-gradient(135deg,#2a2a2a 0%,#1a1a1a 100%);
     border-radius:40px;padding:3.5% 3.5% 12%;
     box-shadow:0 15px 50px rgba(0,0,0,0.4);
     transition:transform 0.3s ease;
+    height:500px;
   }
   .lightbox-phone:hover{transform:translateY(-10px);}
   .lightbox-phone-notch{
@@ -434,10 +435,81 @@
   .lightbox-phone-screen{
     position:absolute;top:8%;left:3.5%;right:3.5%;bottom:12%;
     background:#fff;border-radius:8px;overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
   }
   .lightbox-phone-screen img{
-    width:100%;height:100%;object-fit:contain;display:block;
+    max-width:100%;max-height:100%;object-fit:contain;display:block;
   }
+
+  /* ---------- IMAGE MODALS ---------- */
+  .image-modal{
+    display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+    background:rgba(19,16,24,0.95);z-index:2000;overflow-y:auto;
+  }
+  .image-modal.active{display:block;}
+  .image-modal-content{
+    position:relative;min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;
+    justify-content:center;padding:60px 20px 40px;
+  }
+  .image-modal-content img{
+    max-width:95%;max-height:85vh;object-fit:contain;border-radius:12px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.5);
+  }
+  .image-modal-close{
+    position:fixed;top:20px;right:20px;
+    width:44px;height:44px;border-radius:50%;
+    background:rgba(255,255,255,0.15);color:#fff;
+    border:2px solid rgba(255,255,255,0.3);
+    font-size:24px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:all .15s ease;z-index:2001;
+  }
+  .image-modal-close:hover{background:rgba(255,255,255,0.25);transform:scale(1.1);}
+
+  /* Carousel Modal */
+  .carousel-modal{
+    display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+    background:rgba(19,16,24,0.95);z-index:2000;overflow-y:auto;
+  }
+  .carousel-modal.active{display:block;}
+  .carousel-modal-content{
+    position:relative;min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;
+    justify-content:center;padding:60px 20px 40px;
+  }
+  .carousel-container{
+    position:relative;width:100%;max-width:900px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .carousel-image-wrapper{
+    position:relative;width:100%;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .carousel-image-wrapper img{
+    max-width:95%;max-height:75vh;object-fit:contain;border-radius:12px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.5);
+  }
+  .carousel-btn{
+    position:absolute;top:50%;transform:translateY(-50%);
+    background:rgba(255,255,255,0.15);color:#fff;
+    border:2px solid rgba(255,255,255,0.3);
+    width:40px;height:40px;border-radius:50%;
+    cursor:pointer;display:flex;align-items:center;justify-content:center;
+    font-size:20px;transition:all .15s ease;z-index:10;
+  }
+  .carousel-btn:hover{background:rgba(255,255,255,0.25);}
+  .carousel-btn.prev{left:10px;}
+  .carousel-btn.next{right:10px;}
+  .carousel-dots{
+    display:flex;gap:10px;margin-top:24px;
+  }
+  .carousel-dot{
+    width:10px;height:10px;border-radius:50%;
+    background:rgba(255,255,255,0.3);cursor:pointer;
+    transition:all .15s ease;
+  }
+  .carousel-dot.active{background:var(--lime);transform:scale(1.2);}
 
   /* ---------- FOOTER ---------- */
   footer{
@@ -539,10 +611,11 @@
     <p class="hint">Browse through my design work across different categories. Switch tabs to explore more.</p>
 
     <div class="tabs">
-      <button class="tab-btn active" data-cat="uiux">ADVERTISING DESIGN</button>
-      <button class="tab-btn" data-cat="mockups">AI Mockups</button>
-      <button class="tab-btn" data-cat="logo">Logo & Branding</button>
-      <button class="tab-btn" data-cat="appdesigns">App Designs</button>
+      <button class="tab-btn active" data-cat="uiux">UI/UX DESIGNS</button>
+      <button class="tab-btn" data-cat="mockups">AI MOCKUPS</button>
+      <button class="tab-btn" data-cat="logo">LOGO & BRANDING</button>
+      <button class="tab-btn" data-cat="webdesigns">WEB DESIGNS</button>
+      <button class="tab-btn" data-cat="appdesigns">MOBILE DESIGNS</button>
     </div>
 
     <div class="grid-cat active" data-cat="uiux">
@@ -550,10 +623,6 @@
       <div class="tile"><img src="images/uiux/ad_2.jpg" alt="Advertising Design 2"></div>
       <div class="tile"><img src="images/uiux/ad_3.jpg" alt="Advertising Design 3"></div>
       <div class="tile"><img src="images/uiux/ad_4.jpg" alt="Advertising Design 4"></div>
-      <div class="tile"><img src="images/website/web1.jpg" alt="Website Design 1"></div>
-      <div class="tile"><img src="images/website/web2.png" alt="Website Design 2"></div>
-      <div class="tile"><img src="images/website/web4.png" alt="Website Design 4"></div>
-      <div class="tile"><img src="images/website/web5.png" alt="Website Design 5"></div>
     </div>
     <div class="grid-cat" data-cat="mockups">
       <div class="tile"><img src="images/mockups/mockup_1.jpg" alt="Mockup 1"></div>
@@ -567,6 +636,12 @@
       <div class="tile"><img src="images/logo/logo_1.jpg" alt="Logo 1"></div>
       <div class="tile"><img src="images/logo/logo_2.jpg" alt="Logo 2"></div>
       <div class="tile"><img src="images/logo/logo_3.jpg" alt="Logo 3"></div>
+    </div>
+    <div class="grid-cat" data-cat="webdesigns">
+      <div class="tile web-design-tile" data-full="images/website/web1.jpg"><img src="images/website/front_web1.png" alt="Website Design 1"></div>
+      <div class="tile web-design-tile" data-full="images/website/web2.png"><img src="images/website/front_web2.png" alt="Website Design 2"></div>
+      <div class="tile web-design-tile" data-full="images/website/web4.png"><img src="images/website/front_web4.png" alt="Website Design 4"></div>
+      <div class="tile web-design-tile" data-full="images/website/web5.png"><img src="images/website/front_web5.png" alt="Website Design 5"></div>
     </div>
     <div class="app-designs-tab" data-cat="appdesigns">
       <!-- App 1: MySJPS Connect -->
@@ -742,6 +817,172 @@
   document.addEventListener('keydown', (e) => {
     if(!lightbox.classList.contains('active')) return;
     if(e.key === 'Escape') closeLightbox();
+  });
+
+  // ---- Web Designs Modal (single image) ----
+  const webModal = document.createElement('div');
+  webModal.className = 'image-modal';
+  webModal.id = 'web-modal';
+  webModal.innerHTML = `
+    <button class="image-modal-close" id="web-modal-close">✕</button>
+    <div class="image-modal-content">
+      <img src="" alt="Website Design" id="web-modal-img">
+    </div>
+  `;
+  document.body.appendChild(webModal);
+
+  const webModalImg = document.getElementById('web-modal-img');
+  const webModalClose = document.getElementById('web-modal-close');
+
+  document.querySelectorAll('.web-design-tile').forEach(tile => {
+    tile.addEventListener('click', () => {
+      const fullImg = tile.dataset.full;
+      webModalImg.src = fullImg;
+      webModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  webModalClose.addEventListener('click', () => {
+    webModal.classList.remove('active');
+    document.body.style.overflow = '';
+  });
+  webModal.addEventListener('click', (e) => {
+    if(e.target === webModal) {
+      webModal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+
+  // ---- Champion Case Study Modal (single image) ----
+  const championModal = document.createElement('div');
+  championModal.className = 'image-modal';
+  championModal.id = 'champion-modal';
+  championModal.innerHTML = `
+    <button class="image-modal-close" id="champion-modal-close">✕</button>
+    <div class="image-modal-content">
+      <img src="images/web_champhion/front_champion.png" alt="Hospital Landing Page" id="champion-modal-img">
+    </div>
+  `;
+  document.body.appendChild(championModal);
+
+  const championModalClose = document.getElementById('champion-modal-close');
+  const championCaseStudyImg = document.querySelector('.case-study:first-child .case-study-image img');
+  
+  championCaseStudyImg.style.cursor = 'pointer';
+  championCaseStudyImg.addEventListener('click', () => {
+    championModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  });
+
+  championModalClose.addEventListener('click', () => {
+    championModal.classList.remove('active');
+    document.body.style.overflow = '';
+  });
+  championModal.addEventListener('click', (e) => {
+    if(e.target === championModal) {
+      championModal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+
+  // ---- 2nd Runner-Up Carousel Modal (multiple images) ----
+  const carouselModal = document.createElement('div');
+  carouselModal.className = 'carousel-modal';
+  carouselModal.id = 'carousel-modal';
+  carouselModal.innerHTML = `
+    <button class="image-modal-close" id="carousel-modal-close">✕</button>
+    <div class="carousel-modal-content">
+      <div class="carousel-container">
+        <button class="carousel-btn prev" id="carousel-prev">‹</button>
+        <div class="carousel-image-wrapper">
+          <img src="" alt="Project Screen" id="carousel-img">
+        </div>
+        <button class="carousel-btn next" id="carousel-next">›</button>
+      </div>
+      <div class="carousel-dots" id="carousel-dots"></div>
+    </div>
+  `;
+  document.body.appendChild(carouselModal);
+
+  const carouselImages = [
+    'images/web_2nd/front_2nd.png',
+    'images/web_2nd/first_2nd.png',
+    'images/web_2nd/second_2nd.png',
+    'images/web_2nd/third_2nd.png'
+  ];
+  let currentCarouselIndex = 0;
+
+  const carouselImg = document.getElementById('carousel-img');
+  const carouselDots = document.getElementById('carousel-dots');
+  const carouselPrev = document.getElementById('carousel-prev');
+  const carouselNext = document.getElementById('carousel-next');
+  const carouselClose = document.getElementById('carousel-modal-close');
+
+  // Create dots
+  carouselImages.forEach((_, idx) => {
+    const dot = document.createElement('div');
+    dot.className = 'carousel-dot' + (idx === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goToCarouselSlide(idx));
+    carouselDots.appendChild(dot);
+  });
+
+  function updateCarousel() {
+    carouselImg.src = carouselImages[currentCarouselIndex];
+    document.querySelectorAll('.carousel-dot').forEach((dot, idx) => {
+      dot.classList.toggle('active', idx === currentCarouselIndex);
+    });
+  }
+
+  function goToCarouselSlide(index) {
+    currentCarouselIndex = index;
+    updateCarousel();
+  }
+
+  carouselPrev.addEventListener('click', () => {
+    currentCarouselIndex = (currentCarouselIndex - 1 + carouselImages.length) % carouselImages.length;
+    updateCarousel();
+  });
+
+  carouselNext.addEventListener('click', () => {
+    currentCarouselIndex = (currentCarouselIndex + 1) % carouselImages.length;
+    updateCarousel();
+  });
+
+  const secondCaseStudyImg = document.querySelector('.case-study:nth-child(2) .case-study-image img');
+  secondCaseStudyImg.style.cursor = 'pointer';
+  secondCaseStudyImg.addEventListener('click', () => {
+    currentCarouselIndex = 0;
+    updateCarousel();
+    carouselModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  });
+
+  carouselClose.addEventListener('click', () => {
+    carouselModal.classList.remove('active');
+    document.body.style.overflow = '';
+  });
+  carouselModal.addEventListener('click', (e) => {
+    if(e.target === carouselModal) {
+      carouselModal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+
+  // Close modals with Escape key
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape') {
+      if(carouselModal.classList.contains('active')) {
+        carouselModal.classList.remove('active');
+        document.body.style.overflow = '';
+      } else if(championModal.classList.contains('active')) {
+        championModal.classList.remove('active');
+        document.body.style.overflow = '';
+      } else if(webModal.classList.contains('active')) {
+        webModal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
   });
 </script>
 </body>
