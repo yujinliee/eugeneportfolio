@@ -165,27 +165,107 @@
   .chip:nth-child(3n){background:var(--violet-2);color:#fff;box-shadow:5px 5px 0 var(--violet);}
   .chip:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 var(--ink);}
 
-  /* ---------- ACHIEVEMENTS ---------- */
-  .achieve{background:linear-gradient(180deg,#FBF9FF 0%,#F1ECFF 100%);}
-  .achieve h2{font-size:clamp(30px,4vw,46px);}
-  .achieve-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:44px;}
-  @media(max-width:680px){.achieve-grid{grid-template-columns:1fr;}}
-  .achieve-card{
-    background:#fff;border-radius:20px;padding:30px;
-    border:1px solid var(--line);
-    display:flex;gap:18px;align-items:flex-start;
-    position:relative;overflow:hidden;
+  /* ---------- CASE STUDIES ---------- */
+  .case-studies{background:linear-gradient(180deg,#FBF9FF 0%,#F1ECFF 100%);}
+  .case-studies h2{font-size:clamp(30px,4vw,46px);}
+  .case-study{
+    display:grid;grid-template-columns:1.2fr 1fr;gap:40px;margin-top:50px;
+    align-items:start;
   }
-  .achieve-card .medal{font-size:34px;}
-  .achieve-card h3{font-family:'Sora';font-size:19px;font-weight:700;}
-  .achieve-card .yr{
-    font-family:'Space Mono',monospace;font-size:12px;color:var(--muted);margin-top:6px;display:block;
+  @media(max-width:968px){.case-study{grid-template-columns:1fr;gap:30px;}}
+  
+  /* Laptop Mockup */
+  .laptop-mockup{
+    position:relative;width:100%;padding-bottom:75%;
+    background:linear-gradient(135deg,#2a2a2a 0%,#1a1a1a 100%);
+    border-radius:16px 16px 0 0;padding:2.5% 2.5% 0;
+    box-shadow:0 10px 40px rgba(0,0,0,0.15);
   }
-  .achieve-card::after{
-    content:"";position:absolute;right:-30px;top:-30px;width:90px;height:90px;
-    border-radius:50%;background:var(--lime);opacity:0.35;
+  .laptop-screen{
+    position:absolute;top:2.5%;left:2.5%;right:2.5%;bottom:8%;
+    background:#fff;border-radius:8px 8px 0 0;overflow:hidden;
   }
-  .achieve-card:first-child::after{background:var(--violet-2);opacity:0.18;}
+  .laptop-screen-inner{
+    height:100%;overflow-y:auto;overflow-x:hidden;
+    scrollbar-width:thin;scrollbar-color:var(--violet-2) var(--line);
+  }
+  .laptop-screen-inner::-webkit-scrollbar{width:8px;}
+  .laptop-screen-inner::-webkit-scrollbar-track{background:var(--line);}
+  .laptop-screen-inner::-webkit-scrollbar-thumb{background:var(--violet-2);border-radius:4px;}
+  .laptop-screen-inner img{width:100%;display:block;}
+  .laptop-base{
+    position:relative;width:120%;left:-10%;height:8%;
+    background:linear-gradient(180deg,#3a3a3a 0%,#2a2a2a 100%);
+    border-radius:0 0 12px 12px;margin-top:-1px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+  }
+  .laptop-base::before{
+    content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:15%;height:30%;background:#1a1a1a;border-radius:0 0 8px 8px;
+  }
+  
+  /* Case Study Info */
+  .case-study-info{
+    padding:20px 0;
+  }
+  .case-study-badge{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'Space Mono',monospace;font-size:13px;
+    background:var(--lime);color:var(--ink);
+    padding:8px 16px;border-radius:999px;
+    margin-bottom:16px;font-weight:600;
+  }
+  .case-study-info h3{
+    font-size:clamp(24px,3vw,36px);margin-bottom:8px;
+  }
+  .case-study-role{
+    font-family:'Space Mono',monospace;font-size:12px;
+    color:var(--violet);letter-spacing:0.08em;
+    text-transform:uppercase;margin-bottom:20px;
+  }
+  .case-study-info p{
+    color:var(--muted);font-size:15px;line-height:1.75;
+  }
+
+  /* ---------- APP DESIGNS ---------- */
+  .app-designs{background:var(--paper);}
+  .app-designs h2{font-size:clamp(30px,4vw,46px);}
+  .app-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:40px;margin-top:50px;
+  }
+  @media(max-width:768px){.app-grid{grid-template-columns:1fr;gap:30px;}}
+  
+  /* Phone Mockup */
+  .phone-mockup{
+    display:flex;flex-direction:column;align-items:center;gap:20px;
+  }
+  .phone-frame{
+    position:relative;width:100%;max-width:280px;padding-bottom:200%;
+    background:linear-gradient(135deg,#2a2a2a 0%,#1a1a1a 100%);
+    border-radius:40px;padding:3.5% 3.5% 12%;
+    box-shadow:0 10px 40px rgba(0,0,0,0.2);
+  }
+  .phone-notch{
+    position:absolute;top:3.5%;left:50%;transform:translateX(-50%);
+    width:30%;height:2.5%;background:#1a1a1a;
+    border-radius:0 0 12px 12px;z-index:2;
+  }
+  .phone-screen{
+    position:absolute;top:8%;left:3.5%;right:3.5%;bottom:12%;
+    background:#fff;border-radius:8px;overflow:hidden;
+  }
+  .phone-screen-inner{
+    height:100%;overflow-y:auto;overflow-x:hidden;
+    scrollbar-width:thin;scrollbar-color:var(--violet-2) var(--line);
+  }
+  .phone-screen-inner::-webkit-scrollbar{width:6px;}
+  .phone-screen-inner::-webkit-scrollbar-track{background:var(--line);}
+  .phone-screen-inner::-webkit-scrollbar-thumb{background:var(--violet-2);border-radius:3px;}
+  .phone-screen-inner img{width:100%;display:block;}
+  .phone-label{
+    font-family:'Archivo Black',sans-serif;font-size:18px;
+    text-align:center;color:var(--ink);
+  }
 
   /* ---------- PORTFOLIO ---------- */
   .portfolio h2{font-size:clamp(30px,4vw,46px);}
@@ -346,32 +426,6 @@
   </div>
 </section>
 
-<!-- ================= ACHIEVEMENTS ================= -->
-<section class="achieve">
-  <div class="wrap">
-    <p class="eyebrow">Recognition</p>
-    <h2>Achievements</h2>
-    <div class="achieve-grid">
-      <div class="achieve-card">
-        <div class="medal">🏆</div>
-        <div>
-          <h3>Champion</h3>
-          <p style="color:var(--muted);font-size:14px;margin-top:4px;">Website Design Competition</p>
-          <span class="yr">2025</span>
-        </div>
-      </div>
-      <div class="achieve-card">
-        <div class="medal">🥈</div>
-        <div>
-          <h3>2nd Runner-Up</h3>
-          <p style="color:var(--muted);font-size:14px;margin-top:4px;">Website Design Competition</p>
-          <span class="yr">2026</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ================= PORTFOLIO ================= -->
 <section class="portfolio">
   <div class="wrap">
@@ -455,6 +509,99 @@
         <input type="file" accept="image/*">
         <img src="images/logo/logo_3.jpg" alt="Logo 3">
       </label>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CASE STUDIES ================= -->
+<section class="case-studies">
+  <div class="wrap">
+    <p class="eyebrow">Case Studies</p>
+    <h2>Featured Projects</h2>
+    
+    <!-- Case Study 1: Champion -->
+    <div class="case-study">
+      <div class="laptop-mockup">
+        <div class="laptop-screen">
+          <div class="laptop-screen-inner">
+            <img src="images/web_champhion/web3.png" alt="Hospital Landing Page">
+          </div>
+        </div>
+        <div class="laptop-base"></div>
+      </div>
+      <div class="case-study-info">
+        <div class="case-study-badge">🏆 Champion</div>
+        <h3>Hospital Landing Page</h3>
+        <div class="case-study-role">Duo Project — 2025</div>
+        <p>Tasked with designing a landing page related to health, my partner and I created a landing page for a hospital — focused on clear information hierarchy, trust-building visuals, and an easy path to booking or contacting care.</p>
+      </div>
+    </div>
+
+    <!-- Case Study 2: 2nd Runner-Up -->
+    <div class="case-study">
+      <div class="laptop-mockup">
+        <div class="laptop-screen">
+          <div class="laptop-screen-inner">
+            <img src="images/web_2nd/HomePage.jpg" alt="Accessible Marketplace Homepage">
+            <img src="images/web_2nd/MobilityAids.jpg" alt="Mobility Aids Category">
+            <img src="images/web_2nd/Daily Living Tools.jpg" alt="Daily Living Tools Category">
+            <img src="images/web_2nd/Checkout Form.jpg" alt="Checkout Form">
+          </div>
+        </div>
+        <div class="laptop-base"></div>
+      </div>
+      <div class="case-study-info">
+        <div class="case-study-badge">🥈 2nd Runner-Up</div>
+        <h3>Accessible Marketplace for PWDs</h3>
+        <div class="case-study-role">Solo Project — 2026</div>
+        <p>Given a case study brief to design and prototype an accessible desktop web marketplace (1440×1080px) in Figma for persons with disabilities (PWDs) to browse and purchase mobility aids and daily living tools. The design focused on high contrast, legible typography, clear layout hierarchy, and intuitive navigation — covering two main categories: Mobility Aids (wheelchairs, canes, scooters) and Daily Living Tools (kitchenware, bathing aids, medication organizers), organized by task and room for easy discovery.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= APP DESIGNS ================= -->
+<section class="app-designs">
+  <div class="wrap">
+    <p class="eyebrow">Mobile Work</p>
+    <h2>App Designs</h2>
+    <div class="app-grid">
+      
+      <!-- App 1: BarkCard -->
+      <div class="phone-mockup">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="phone-screen-inner">
+              <img src="images/mobile_barkcard/Sign In Page.jpg" alt="BarkCard Sign In">
+              <img src="images/mobile_barkcard/User's Dashboard.jpg" alt="Dashboard">
+              <img src="images/mobile_barkcard/User's Transactions.jpg" alt="Transactions">
+              <img src="images/mobile_barkcard/iPhone 14 & 15 Pro - 2.jpg" alt="BarkCard App">
+            </div>
+          </div>
+        </div>
+        <div class="phone-label">BarkCard</div>
+      </div>
+
+      <!-- App 2: SJPS -->
+      <div class="phone-mockup">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="phone-screen-inner">
+              <img src="images/mobile_sjps/Splash Screen (2).jpg" alt="Splash Screen">
+              <img src="images/mobile_sjps/Splash Screen (3).jpg" alt="Splash Screen 2">
+              <img src="images/mobile_sjps/Log In.jpg" alt="Login">
+              <img src="images/mobile_sjps/Verification.jpg" alt="Verification">
+              <img src="images/mobile_sjps/Main Dashboard.jpg" alt="Main Dashboard">
+              <img src="images/mobile_sjps/Frame 79.jpg" alt="SJPS Feature">
+              <img src="images/mobile_sjps/Logo.jpg" alt="SJPS Logo">
+            </div>
+          </div>
+        </div>
+        <div class="phone-label">SJPS</div>
+      </div>
+
     </div>
   </div>
 </section>
