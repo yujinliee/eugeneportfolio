@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eugene Galima Dagatantan — UI/UX Designer</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Sora:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
+
+  :root{
+    --violet:#5B21D6;
+    --violet-2:#8B5CF6;
+    --lime:#D7FF3E;
+    --ink:#131018;
+    --paper:#FBF9FF;
+    --coral:#FF5C7A;
+    --muted:#6E6580;
+    --line:#E7E2F5;
+    --radius:22px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Sora',sans-serif;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:'Archivo Black',sans-serif;text-transform:none;line-height:1.05;letter-spacing:-0.01em;}
+  .eyebrow{
+    font-family:'Space Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--violet);
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:7px;height:7px;border-radius:50%;
+    background:var(--lime);
+    box-shadow:0 0 0 3px rgba(215,255,62,0.35);
+  }
+  .wrap{max-width:1160px;margin:0 auto;padding:0 32px;}
+  section{position:relative;padding:110px 0;}
+  @media(max-width:720px){ section{padding:70px 0;} .wrap{padding:0 22px;} }
+
+  /* ---------- floating dots (Figma-nod accent) ---------- */
+  .dot{position:absolute;border-radius:50%;opacity:0.9;animation:float 7s ease-in-out infinite;}
+  @keyframes float{
+    0%,100%{transform:translateY(0) rotate(0deg);}
+    50%{transform:translateY(-18px) rotate(8deg);}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding-top:90px;
+    overflow:hidden;
+  }
+  .hero-ribbon{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+  .hero-ribbon path{
+    fill:none;
+    stroke-width:3;
+    stroke-linecap:round;
+    stroke-dasharray:2400;
+    stroke-dashoffset:2400;
+    animation:draw 2.6s cubic-bezier(.65,0,.35,1) forwards;
+  }
+  @keyframes draw{to{stroke-dashoffset:0;}}
+  .hero-inner{position:relative;z-index:2;}
+  .hero .eyebrow{margin-bottom:26px;}
+  .hero h1{
+    font-size:clamp(40px,7vw,84px);
+    max-width:920px;
+  }
+  .hero h1 span{color:var(--violet);}
+  .hero h1 mark{
+    background:var(--lime);
+    color:var(--ink);
+    padding:0 14px;
+    border-radius:10px;
+    box-decoration-break:clone;
+    -webkit-box-decoration-break:clone;
+  }
+  .hero-sub{
+    margin-top:28px;
+    max-width:520px;
+    font-size:17px;
+    color:var(--muted);
+    line-height:1.65;
+  }
+  .hero-tags{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:38px;
+  }
+  .pill{
+    font-family:'Space Mono',monospace;
+    font-size:12.5px;
+    padding:10px 16px;
+    border:1.5px solid var(--ink);
+    border-radius:999px;
+    background:#fff;
+  }
+  .scroll-cue{
+    position:absolute;
+    bottom:36px;left:32px;
+    font-family:'Space Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.12em;
+    color:var(--muted);
+    display:flex;align-items:center;gap:10px;
+  }
+  .scroll-cue .line{width:34px;height:1px;background:var(--muted);animation:pulse 1.8s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:0.3;}50%{opacity:1;}}
+
+  /* ---------- ABOUT ---------- */
+  .about{background:var(--ink);color:#fff;border-radius:40px;margin:0 20px;overflow:hidden;position:relative;}
+  .about .wrap{max-width:1120px;}
+  .about-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:60px;align-items:start;}
+  @media(max-width:820px){.about-grid{grid-template-columns:1fr;gap:36px;}}
+  .about h2{font-size:clamp(30px,4vw,46px);color:#fff;margin-top:16px;}
+  .stat-card{
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.14);
+    border-radius:18px;
+    padding:22px 24px;
+    margin-top:26px;
+  }
+  .stat-card .num{font-family:'Archivo Black';font-size:40px;color:var(--lime);}
+  .stat-card .lbl{font-family:'Space Mono',monospace;font-size:12px;color:#b9b2cf;margin-top:4px;letter-spacing:0.06em;}
+  .about-text p{color:#cfc9de;font-size:16px;line-height:1.85;margin-top:18px;}
+  .about-text p:first-child{margin-top:26px;}
+  .tool-tag{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'Space Mono',monospace;font-size:12.5px;
+    background:var(--violet-2);color:#fff;
+    padding:8px 14px;border-radius:999px;margin-top:24px;
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skills h2{font-size:clamp(30px,4vw,46px);}
+  .skills-grid{
+    display:flex;flex-wrap:wrap;gap:14px;margin-top:44px;
+  }
+  .chip{
+    font-size:15.5px;font-weight:600;
+    padding:16px 22px;
+    border-radius:16px;
+    background:#fff;
+    border:1.5px solid var(--ink);
+    box-shadow:5px 5px 0 var(--ink);
+    transition:transform .18s ease, box-shadow .18s ease;
+    cursor:default;
+  }
+  .chip:nth-child(3n+1){background:var(--lime);}
+  .chip:nth-child(3n+2){background:#fff;}
+  .chip:nth-child(3n){background:var(--violet-2);color:#fff;box-shadow:5px 5px 0 var(--violet);}
+  .chip:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 var(--ink);}
+
+  /* ---------- ACHIEVEMENTS ---------- */
+  .achieve{background:linear-gradient(180deg,#FBF9FF 0%,#F1ECFF 100%);}
+  .achieve h2{font-size:clamp(30px,4vw,46px);}
+  .achieve-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:44px;}
+  @media(max-width:680px){.achieve-grid{grid-template-columns:1fr;}}
+  .achieve-card{
+    background:#fff;border-radius:20px;padding:30px;
+    border:1px solid var(--line);
+    display:flex;gap:18px;align-items:flex-start;
+    position:relative;overflow:hidden;
+  }
+  .achieve-card .medal{font-size:34px;}
+  .achieve-card h3{font-family:'Sora';font-size:19px;font-weight:700;}
+  .achieve-card .yr{
+    font-family:'Space Mono',monospace;font-size:12px;color:var(--muted);margin-top:6px;display:block;
+  }
+  .achieve-card::after{
+    content:"";position:absolute;right:-30px;top:-30px;width:90px;height:90px;
+    border-radius:50%;background:var(--lime);opacity:0.35;
+  }
+  .achieve-card:first-child::after{background:var(--violet-2);opacity:0.18;}
+
+  /* ---------- PORTFOLIO ---------- */
+  .portfolio h2{font-size:clamp(30px,4vw,46px);}
+  .portfolio > .wrap > p.hint{color:var(--muted);margin-top:14px;max-width:520px;font-size:15px;line-height:1.6;}
+  .tabs{display:flex;gap:10px;margin-top:40px;flex-wrap:wrap;}
+  .tab-btn{
+    font-family:'Space Mono',monospace;font-size:13px;
+    padding:11px 18px;border-radius:999px;
+    border:1.5px solid var(--ink);background:#fff;cursor:pointer;
+    transition:all .15s ease;
+  }
+  .tab-btn.active{background:var(--ink);color:#fff;}
+  .grid-cat{display:none;margin-top:30px;}
+  .grid-cat.active{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  @media(max-width:760px){.grid-cat.active{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:480px){.grid-cat.active{grid-template-columns:1fr;}}
+  
+  .grid-cat[data-cat="uiux"]{
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+  }
+  .grid-cat[data-cat="uiux"] .slot{
+    aspect-ratio:210/297;
+  }
+  @media(max-width:1024px){
+    .grid-cat[data-cat="uiux"]{
+      grid-template-columns:repeat(2,1fr);
+    }
+  }
+  @media(max-width:480px){
+    .grid-cat[data-cat="uiux"]{
+      grid-template-columns:1fr;
+    }
+  }
+
+  .slot{
+    aspect-ratio:1/1;
+    border-radius:18px;
+    border:2px dashed var(--line);
+    background:#fff;
+    display:flex;align-items:center;justify-content:center;
+    position:relative;overflow:hidden;
+    cursor:pointer;
+    transition:border-color .18s ease, transform .18s ease;
+  }
+  .slot:hover{border-color:var(--violet-2);transform:translateY(-3px);}
+  .slot input{display:none;}
+  .slot .placeholder{
+    display:flex;flex-direction:column;align-items:center;gap:10px;
+    color:var(--muted);text-align:center;padding:14px;
+  }
+  .slot .placeholder .plus{
+    width:40px;height:40px;border-radius:50%;
+    background:var(--paper);border:1.5px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    font-size:20px;color:var(--violet);
+  }
+  .slot .placeholder span{font-family:'Space Mono',monospace;font-size:11.5px;}
+  .slot img{width:100%;height:100%;object-fit:cover;display:block;}
+  .slot .remove{
+    position:absolute;top:8px;right:8px;
+    width:26px;height:26px;border-radius:50%;
+    background:rgba(19,16,24,0.75);color:#fff;
+    display:none;align-items:center;justify-content:center;
+    font-size:14px;line-height:1;cursor:pointer;z-index:3;
+  }
+  .slot.filled:hover .remove{display:flex;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--ink);color:#fff;
+    border-radius:40px;margin:0 20px 20px;
+    padding:80px 0 40px;position:relative;overflow:hidden;
+  }
+  footer h2{color:#fff;font-size:clamp(28px,5vw,52px);}
+  .social-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px;}
+  .social-btn{
+    font-family:'Space Mono',monospace;font-size:13px;
+    padding:13px 20px;border-radius:999px;
+    border:1.5px solid rgba(255,255,255,0.3);
+    color:#fff;text-decoration:none;
+    display:inline-flex;align-items:center;gap:8px;
+    transition:all .18s ease;
+  }
+  .social-btn:hover{background:var(--lime);color:var(--ink);border-color:var(--lime);}
+  .foot-bottom{
+    margin-top:70px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;
+    font-family:'Space Mono',monospace;font-size:11.5px;color:#8b83a0;
+    border-top:1px solid rgba(255,255,255,0.12);padding-top:24px;
+  }
+
+  ::selection{background:var(--lime);color:var(--ink);}
+</style>
+</head>
+<body>
+
+<!-- ================= HERO ================= -->
+<header class="hero wrap">
+  <svg class="hero-ribbon" viewBox="0 0 1160 800" preserveAspectRatio="none">
+    <path d="M -50 620 C 150 500, 120 250, 350 210 C 560 175, 520 420, 760 380 C 950 350, 900 120, 1180 90" stroke="#5B21D6" opacity="0.5"/>
+    <path d="M -80 200 C 100 260, 60 60, 300 40" stroke="#D7FF3E" style="animation-delay:.3s" opacity="0.8"/>
+    <path d="M 820 720 C 980 660, 1000 780, 1160 700" stroke="#8B5CF6" style="animation-delay:.5s" opacity="0.6"/>
+  </svg>
+  <span class="dot" style="width:18px;height:18px;background:var(--violet-2);top:14%;right:12%;"></span>
+  <span class="dot" style="width:11px;height:11px;background:var(--coral);top:60%;right:6%;animation-delay:1s;"></span>
+  <span class="dot" style="width:14px;height:14px;background:var(--lime);top:38%;right:22%;animation-delay:2s;"></span>
+
+  <div class="hero-inner">
+    <p class="eyebrow">UI/UX Designer · BSIT Student</p>
+    <h1>Hello, I'm <span>Eugene</span> —<br>I design <mark>clean</mark>, human digital<br>experiences.</h1>
+    <p class="hero-sub">22-year-old, 4th-year BSIT student who turns ideas into interfaces. Figma is my main tool — I design UIs, build AI-assisted mockups, and shape layouts people actually enjoy using.</p>
+    <div class="hero-tags">
+      <span class="pill">📍 Figma-first workflow</span>
+      <span class="pill">🎓 4th Year BSIT</span>
+      <span class="pill">🏆 2x Design Champion</span>
+    </div>
+  </div>
+  <div class="scroll-cue"><span class="line"></span> SCROLL TO EXPLORE</div>
+</header>
+
+<!-- ================= ABOUT ================= -->
+<section class="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div>
+        <p class="eyebrow" style="color:var(--lime);">About me</p>
+        <h2>Designing with clarity,<br>built with Figma.</h2>
+        <div class="stat-card">
+          <div class="num">22</div>
+          <div class="lbl">YEARS OLD — BSIT, 4TH YEAR</div>
+        </div>
+        <div class="tool-tag">✦ Primary tool: Figma</div>
+      </div>
+      <div class="about-text">
+        <p>Hi, I'm Eugene Galima Dagatantan — a fourth-year Bachelor of Science in Information Technology student with a strong passion for creating clean, modern, and user-centered digital experiences.</p>
+        <p>I specialize in UI/UX design, with Figma as my primary tool. My strengths include designing intuitive interfaces, building realistic AI-assisted mockups, crafting visually appealing layouts, and applying effective typography to communicate ideas clearly.</p>
+        <p>I continuously challenge myself by exploring new design trends, motion design, and creative workflows. My goal is to create digital products that look premium and feel meaningful to use.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section class="skills">
+  <div class="wrap">
+    <p class="eyebrow">What I work with</p>
+    <h2>Skills &amp; toolkit</h2>
+    <div class="skills-grid">
+      <div class="chip">UI/UX Design</div>
+      <div class="chip">Figma</div>
+      <div class="chip">AI Mockups</div>
+      <div class="chip">Typography</div>
+      <div class="chip">Visual Design</div>
+      <div class="chip">Wireframing &amp; Prototyping</div>
+      <div class="chip">Design Systems</div>
+      <div class="chip">Branding &amp; Promotional Graphics</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ACHIEVEMENTS ================= -->
+<section class="achieve">
+  <div class="wrap">
+    <p class="eyebrow">Recognition</p>
+    <h2>Achievements</h2>
+    <div class="achieve-grid">
+      <div class="achieve-card">
+        <div class="medal">🏆</div>
+        <div>
+          <h3>Champion</h3>
+          <p style="color:var(--muted);font-size:14px;margin-top:4px;">Website Design Competition</p>
+          <span class="yr">2025</span>
+        </div>
+      </div>
+      <div class="achieve-card">
+        <div class="medal">🥈</div>
+        <div>
+          <h3>2nd Runner-Up</h3>
+          <p style="color:var(--muted);font-size:14px;margin-top:4px;">Website Design Competition</p>
+          <span class="yr">2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PORTFOLIO ================= -->
+<section class="portfolio">
+  <div class="wrap">
+    <p class="eyebrow">Selected work</p>
+    <h2>Portfolio</h2>
+    <p class="hint">Click any tile to upload your own work. Switch categories with the tabs below.</p>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-cat="uiux">ADVERTISING DESIGN</button>
+      <button class="tab-btn" data-cat="mockups">AI Mockups</button>
+      <button class="tab-btn" data-cat="logo">Logo & Branding</button>
+    </div>
+
+    <div class="grid-cat active" data-cat="uiux">
+      <label class="slot filled">
+        <span class="remove">✕</span>
+        <input type="file" accept="image/*">
+        <img src="ad_1.jpg" alt="Advertising Design 1">
+      </label>
+      <label class="slot filled">
+        <span class="remove">✕</span>
+        <input type="file" accept="image/*">
+        <img src="ad_2.jpg" alt="Advertising Design 2">
+      </label>
+      <label class="slot filled">
+        <span class="remove">✕</span>
+        <input type="file" accept="image/*">
+        <img src="ad_3.jpg" alt="Advertising Design 3">
+      </label>
+      <label class="slot filled">
+        <span class="remove">✕</span>
+        <input type="file" accept="image/*">
+        <img src="ad_4.jpg" alt="Advertising Design 4">
+      </label>
+    </div>
+    <div class="grid-cat" data-cat="mockups">
+      <label class="slot filled">
+        <span class="remove">✕</span>
+        <input type="file" accept="image/*">
+        <img src="mockup_1.jpg" alt="Mockup 1">
+      </label>
+      <label class="slot filled">
+        <span class="remove">✕</span>
+        <input type="file" accept="image/*">
+        <img src="mockup_2.jpg" alt="Mockup 2">
+      </label>
+      <label class="slot filled">
+        <span class="remove">✕</span>
+        <input type="file" accept="image/*">
+        <img src="mockup_3.jpg" alt="Mockup 3">
+      </label>
+      <label class="slot filled">
+        <span class="remove">✕</span>
+        <input type="file" accept="image/*">
+        <img src="mockup_4.jpg" alt="Mockup 4">
+      </label>
+      <label class="slot filled">
+        <span class="remove">✕</span>
+        <input type="file" accept="image/*">
+        <img src="mockup_5.jpg" alt="Mockup 5">
+      </label>
+      <label class="slot filled">
+        <span class="remove">✕</span>
+        <input type="file" accept="image/*">
+        <img src="mockup_6.jpg" alt="Mockup 6">
+      </label>
+    </div>
+    <div class="grid-cat" data-cat="logo">
+      <label class="slot filled">
+        <span class="remove">✕</span>
+        <input type="file" accept="image/*">
+        <img src="logo_1.jpg" alt="Logo 1">
+      </label>
+      <label class="slot filled">
+        <span class="remove">✕</span>
+        <input type="file" accept="image/*">
+        <img src="logo_2.jpg" alt="Logo 2">
+      </label>
+      <label class="slot filled">
+        <span class="remove">✕</span>
+        <input type="file" accept="image/*">
+        <img src="logo_3.jpg" alt="Logo 3">
+      </label>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <p class="eyebrow" style="color:var(--lime);">Let's connect</p>
+    <h2>My social medias</h2>
+    <div class="social-row">
+      <a class="social-btn" href="https://www.instagram.com/jikjinnx/">✷ Instagram</a>
+      <a class="social-btn" href="https://www.facebook.com/eugenedagatantan24">◆ Facebook</a>
+      <a class="social-btn" href="https://www.linkedin.com/in/edagatantan">▣ LinkedIn</a>
+      <a class="social-btn" href="mailto:edagatantan@gmail.com">✉ Email</a>
+    </div>
+    <div class="foot-bottom">
+      <span>Eugene Galima Dagatantan — UI/UX Designer</span>
+      <span>Built with Figma-first thinking ✦</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+
+  // ---- handle uploads ----
+  document.addEventListener('change', e=>{
+    if(e.target.matches('.slot input[type=file]')){
+      const file=e.target.files[0];
+      if(!file) return;
+      const slot=e.target.closest('.slot');
+      const url=URL.createObjectURL(file);
+      const oldImg=slot.querySelector('img');
+      if(oldImg) oldImg.remove();
+      const img=document.createElement('img');
+      img.src=url;
+      slot.appendChild(img);
+      slot.classList.add('filled');
+    }
+  });
+
+  // ---- remove image ----
+  document.addEventListener('click', e=>{
+    if(e.target.matches('.remove')){
+      e.preventDefault();
+      e.stopPropagation();
+      const slot=e.target.closest('.slot');
+      const img=slot.querySelector('img');
+      if(img) img.remove();
+      slot.classList.remove('filled');
+      slot.querySelector('input').value='';
+    }
+  });
+
+  // ---- tabs ----
+  document.querySelectorAll('.tab-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.grid-cat').forEach(g=>g.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelector(`.grid-cat[data-cat="${btn.dataset.cat}"]`).classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
