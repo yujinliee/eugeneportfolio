@@ -170,38 +170,16 @@
   .case-studies h2{font-size:clamp(30px,4vw,46px);}
   .case-study{
     display:grid;grid-template-columns:1.2fr 1fr;gap:40px;margin-top:50px;
-    align-items:start;
+    align-items:center;
   }
   @media(max-width:968px){.case-study{grid-template-columns:1fr;gap:30px;}}
   
-  /* Laptop Mockup */
-  .laptop-mockup{
-    position:relative;width:100%;padding-bottom:75%;
-    background:linear-gradient(135deg,#2a2a2a 0%,#1a1a1a 100%);
-    border-radius:16px 16px 0 0;padding:2.5% 2.5% 0;
+  .case-study-image{
+    width:100%;border-radius:16px;overflow:hidden;
     box-shadow:0 10px 40px rgba(0,0,0,0.15);
   }
-  .laptop-screen{
-    position:absolute;top:2.5%;left:2.5%;right:2.5%;bottom:8%;
-    background:#fff;border-radius:8px 8px 0 0;overflow:hidden;
-  }
-  .laptop-screen-inner{
-    height:100%;overflow-y:auto;overflow-x:hidden;
-    scrollbar-width:thin;scrollbar-color:var(--violet-2) var(--line);
-  }
-  .laptop-screen-inner::-webkit-scrollbar{width:8px;}
-  .laptop-screen-inner::-webkit-scrollbar-track{background:var(--line);}
-  .laptop-screen-inner::-webkit-scrollbar-thumb{background:var(--violet-2);border-radius:4px;}
-  .laptop-screen-inner img{width:100%;display:block;}
-  .laptop-base{
-    position:relative;width:120%;left:-10%;height:8%;
-    background:linear-gradient(180deg,#3a3a3a 0%,#2a2a2a 100%);
-    border-radius:0 0 12px 12px;margin-top:-1px;
-    box-shadow:0 4px 12px rgba(0,0,0,0.1);
-  }
-  .laptop-base::before{
-    content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
-    width:15%;height:30%;background:#1a1a1a;border-radius:0 0 8px 8px;
+  .case-study-image img{
+    width:100%;height:auto;display:block;
   }
   
   /* Case Study Info */
@@ -287,9 +265,6 @@
     grid-template-columns:repeat(4,1fr);
     gap:16px;
   }
-  .grid-cat[data-cat="uiux"] .slot{
-    aspect-ratio:210/297;
-  }
   @media(max-width:1024px){
     .grid-cat[data-cat="uiux"]{
       grid-template-columns:repeat(2,1fr);
@@ -301,38 +276,102 @@
     }
   }
 
-  .slot{
+  .tile{
     aspect-ratio:1/1;
     border-radius:18px;
-    border:2px dashed var(--line);
+    overflow:hidden;
     background:#fff;
-    display:flex;align-items:center;justify-content:center;
-    position:relative;overflow:hidden;
+    box-shadow:0 2px 8px rgba(0,0,0,0.06);
+    transition:transform .18s ease, box-shadow .18s ease;
     cursor:pointer;
-    transition:border-color .18s ease, transform .18s ease;
   }
-  .slot:hover{border-color:var(--violet-2);transform:translateY(-3px);}
-  .slot input{display:none;}
-  .slot .placeholder{
-    display:flex;flex-direction:column;align-items:center;gap:10px;
-    color:var(--muted);text-align:center;padding:14px;
+  .tile:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,0.12);}
+  .tile img{width:100%;height:100%;object-fit:cover;display:block;}
+
+  /* App Designs Tab */
+  .app-designs-tab{
+    display:none;margin-top:30px;
   }
-  .slot .placeholder .plus{
+  .app-designs-tab.active{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:40px;
+  }
+  @media(max-width:768px){
+    .app-designs-tab.active{
+      grid-template-columns:1fr;gap:30px;
+    }
+  }
+  .app-entry{
+    display:grid;grid-template-columns:1fr 1fr;gap:24px;
+    align-items:center;background:#fff;border-radius:20px;
+    padding:20px;border:1px solid var(--line);
+  }
+  @media(max-width:640px){
+    .app-entry{
+      grid-template-columns:1fr;gap:16px;
+    }
+  }
+  .app-entry-image{
+    aspect-ratio:9/16;border-radius:12px;overflow:hidden;
+    background:var(--paper);cursor:pointer;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  }
+  .app-entry-image img{width:100%;height:100%;object-fit:cover;display:block;}
+  .app-entry-info h3{
+    font-size:clamp(20px,2.5vw,28px);margin-bottom:12px;
+  }
+  .app-entry-info p{
+    color:var(--muted);font-size:14px;line-height:1.7;
+  }
+
+  /* Lightbox */
+  .lightbox{
+    display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+    background:rgba(19,16,24,0.95);z-index:1000;
+    align-items:center;justify-content:center;
+  }
+  .lightbox.active{display:flex;}
+  .lightbox-content{
+    position:relative;max-width:90%;max-height:90%;
+    display:flex;flex-direction:column;align-items:center;gap:20px;
+  }
+  .lightbox-image{
+    max-width:100%;max-height:70vh;object-fit:contain;
+    border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,0.5);
+  }
+  .lightbox-close{
+    position:absolute;top:20px;right:20px;
     width:40px;height:40px;border-radius:50%;
-    background:var(--paper);border:1.5px solid var(--line);
+    background:rgba(255,255,255,0.1);color:#fff;
+    border:2px solid rgba(255,255,255,0.3);
+    font-size:24px;cursor:pointer;
     display:flex;align-items:center;justify-content:center;
-    font-size:20px;color:var(--violet);
+    transition:all .15s ease;
   }
-  .slot .placeholder span{font-family:'Space Mono',monospace;font-size:11.5px;}
-  .slot img{width:100%;height:100%;object-fit:cover;display:block;}
-  .slot .remove{
-    position:absolute;top:8px;right:8px;
-    width:26px;height:26px;border-radius:50%;
-    background:rgba(19,16,24,0.75);color:#fff;
-    display:none;align-items:center;justify-content:center;
-    font-size:14px;line-height:1;cursor:pointer;z-index:3;
+  .lightbox-close:hover{background:rgba(255,255,255,0.2);}
+  .lightbox-nav{
+    position:absolute;top:50%;transform:translateY(-50%);
+    width:50px;height:50px;border-radius:50%;
+    background:rgba(255,255,255,0.1);color:#fff;
+    border:2px solid rgba(255,255,255,0.3);
+    font-size:24px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:all .15s ease;
   }
-  .slot.filled:hover .remove{display:flex;}
+  .lightbox-nav:hover{background:rgba(255,255,255,0.2);}
+  .lightbox-prev{left:20px;}
+  .lightbox-next{right:20px;}
+  .lightbox-thumbnails{
+    display:flex;gap:10px;flex-wrap:wrap;justify-content:center;
+    max-width:80vw;max-height:15vh;overflow-y:auto;
+  }
+  .lightbox-thumb{
+    width:60px;height:100px;border-radius:6px;overflow:hidden;
+    cursor:pointer;opacity:0.6;transition:opacity .15s ease;
+    border:2px solid transparent;
+  }
+  .lightbox-thumb:hover{opacity:0.9;}
+  .lightbox-thumb.active{border-color:var(--lime);opacity:1;}
+  .lightbox-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
 
   /* ---------- FOOTER ---------- */
   footer{
@@ -431,87 +470,74 @@
   <div class="wrap">
     <p class="eyebrow">Selected work</p>
     <h2>Portfolio</h2>
-    <p class="hint">Click any tile to upload your own work. Switch categories with the tabs below.</p>
+    <p class="hint">Browse through my design work across different categories. Switch tabs to explore more.</p>
 
     <div class="tabs">
       <button class="tab-btn active" data-cat="uiux">ADVERTISING DESIGN</button>
       <button class="tab-btn" data-cat="mockups">AI Mockups</button>
       <button class="tab-btn" data-cat="logo">Logo & Branding</button>
+      <button class="tab-btn" data-cat="appdesigns">App Designs</button>
     </div>
 
     <div class="grid-cat active" data-cat="uiux">
-      <label class="slot filled">
-        <span class="remove">✕</span>
-        <input type="file" accept="image/*">
-        <img src="images/uiux/ad_1.jpg" alt="Advertising Design 1">
-      </label>
-      <label class="slot filled">
-        <span class="remove">✕</span>
-        <input type="file" accept="image/*">
-        <img src="images/uiux/ad_2.jpg" alt="Advertising Design 2">
-      </label>
-      <label class="slot filled">
-        <span class="remove">✕</span>
-        <input type="file" accept="image/*">
-        <img src="images/uiux/ad_3.jpg" alt="Advertising Design 3">
-      </label>
-      <label class="slot filled">
-        <span class="remove">✕</span>
-        <input type="file" accept="image/*">
-        <img src="images/uiux/ad_4.jpg" alt="Advertising Design 4">
-      </label>
+      <div class="tile"><img src="images/uiux/ad_1.jpg" alt="Advertising Design 1"></div>
+      <div class="tile"><img src="images/uiux/ad_2.jpg" alt="Advertising Design 2"></div>
+      <div class="tile"><img src="images/uiux/ad_3.jpg" alt="Advertising Design 3"></div>
+      <div class="tile"><img src="images/uiux/ad_4.jpg" alt="Advertising Design 4"></div>
+      <div class="tile"><img src="images/website/web1.jpg" alt="Website Design 1"></div>
+      <div class="tile"><img src="images/website/web2.png" alt="Website Design 2"></div>
+      <div class="tile"><img src="images/website/web4.png" alt="Website Design 4"></div>
+      <div class="tile"><img src="images/website/web5.png" alt="Website Design 5"></div>
     </div>
     <div class="grid-cat" data-cat="mockups">
-      <label class="slot filled">
-        <span class="remove">✕</span>
-        <input type="file" accept="image/*">
-        <img src="images/mockups/mockup_1.jpg" alt="Mockup 1">
-      </label>
-      <label class="slot filled">
-        <span class="remove">✕</span>
-        <input type="file" accept="image/*">
-        <img src="images/mockups/mockup_2.jpg" alt="Mockup 2">
-      </label>
-      <label class="slot filled">
-        <span class="remove">✕</span>
-        <input type="file" accept="image/*">
-        <img src="images/mockups/mockup_3.jpg" alt="Mockup 3">
-      </label>
-      <label class="slot filled">
-        <span class="remove">✕</span>
-        <input type="file" accept="image/*">
-        <img src="images/mockups/mockup_4.jpg" alt="Mockup 4">
-      </label>
-      <label class="slot filled">
-        <span class="remove">✕</span>
-        <input type="file" accept="image/*">
-        <img src="images/mockups/mockup_5.jpg" alt="Mockup 5">
-      </label>
-      <label class="slot filled">
-        <span class="remove">✕</span>
-        <input type="file" accept="image/*">
-        <img src="images/mockups/mockup_6.jpg" alt="Mockup 6">
-      </label>
+      <div class="tile"><img src="images/mockups/mockup_1.jpg" alt="Mockup 1"></div>
+      <div class="tile"><img src="images/mockups/mockup_2.jpg" alt="Mockup 2"></div>
+      <div class="tile"><img src="images/mockups/mockup_3.jpg" alt="Mockup 3"></div>
+      <div class="tile"><img src="images/mockups/mockup_4.jpg" alt="Mockup 4"></div>
+      <div class="tile"><img src="images/mockups/mockup_5.jpg" alt="Mockup 5"></div>
+      <div class="tile"><img src="images/mockups/mockup_6.jpg" alt="Mockup 6"></div>
     </div>
     <div class="grid-cat" data-cat="logo">
-      <label class="slot filled">
-        <span class="remove">✕</span>
-        <input type="file" accept="image/*">
-        <img src="images/logo/logo_1.jpg" alt="Logo 1">
-      </label>
-      <label class="slot filled">
-        <span class="remove">✕</span>
-        <input type="file" accept="image/*">
-        <img src="images/logo/logo_2.jpg" alt="Logo 2">
-      </label>
-      <label class="slot filled">
-        <span class="remove">✕</span>
-        <input type="file" accept="image/*">
-        <img src="images/logo/logo_3.jpg" alt="Logo 3">
-      </label>
+      <div class="tile"><img src="images/logo/logo_1.jpg" alt="Logo 1"></div>
+      <div class="tile"><img src="images/logo/logo_2.jpg" alt="Logo 2"></div>
+      <div class="tile"><img src="images/logo/logo_3.jpg" alt="Logo 3"></div>
+    </div>
+    <div class="app-designs-tab" data-cat="appdesigns">
+      <!-- App 1: SJPS -->
+      <div class="app-entry">
+        <div class="app-entry-image" data-app="sjps">
+          <img src="images/mobile_sjps/Main Dashboard.jpg" alt="MySJPS Connect">
+        </div>
+        <div class="app-entry-info">
+          <h3>MySJPS Connect</h3>
+          <p>A comprehensive mobile application designed to streamline access to social welfare services. Features include user authentication, dashboard navigation, and seamless verification processes. The app prioritizes accessibility and intuitive design to serve diverse user needs effectively.</p>
+        </div>
+      </div>
+
+      <!-- App 2: BarkCard -->
+      <div class="app-entry">
+        <div class="app-entry-image" data-app="barkcard">
+          <img src="images/mobile_barkcard/User's Dashboard.jpg" alt="BarkCard">
+        </div>
+        <div class="app-entry-info">
+          <h3>BarkCard</h3>
+          <p>A modern financial management app focused on simplifying transactions and expense tracking. The dashboard provides users with a clear overview of their financial activities, while the transaction history feature helps monitor spending patterns. Built with user experience and security in mind.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightbox-close">✕</button>
+  <button class="lightbox-nav lightbox-prev" id="lightbox-prev">‹</button>
+  <button class="lightbox-nav lightbox-next" id="lightbox-next">›</button>
+  <div class="lightbox-content">
+    <img class="lightbox-image" id="lightbox-image" src="" alt="">
+    <div class="lightbox-thumbnails" id="lightbox-thumbnails"></div>
+  </div>
+</div>
 
 <!-- ================= CASE STUDIES ================= -->
 <section class="case-studies">
@@ -521,13 +547,8 @@
     
     <!-- Case Study 1: Champion -->
     <div class="case-study">
-      <div class="laptop-mockup">
-        <div class="laptop-screen">
-          <div class="laptop-screen-inner">
-            <img src="images/web_champhion/web3.png" alt="Hospital Landing Page">
-          </div>
-        </div>
-        <div class="laptop-base"></div>
+      <div class="case-study-image">
+        <img src="images/laptop.png" alt="Hospital Landing Page Mockup">
       </div>
       <div class="case-study-info">
         <div class="case-study-badge">🏆 Champion</div>
@@ -539,16 +560,8 @@
 
     <!-- Case Study 2: 2nd Runner-Up -->
     <div class="case-study">
-      <div class="laptop-mockup">
-        <div class="laptop-screen">
-          <div class="laptop-screen-inner">
-            <img src="images/web_2nd/HomePage.jpg" alt="Accessible Marketplace Homepage">
-            <img src="images/web_2nd/MobilityAids.jpg" alt="Mobility Aids Category">
-            <img src="images/web_2nd/Daily Living Tools.jpg" alt="Daily Living Tools Category">
-            <img src="images/web_2nd/Checkout Form.jpg" alt="Checkout Form">
-          </div>
-        </div>
-        <div class="laptop-base"></div>
+      <div class="case-study-image">
+        <img src="images/phone.png" alt="Accessible Marketplace Mockup">
       </div>
       <div class="case-study-info">
         <div class="case-study-badge">🥈 2nd Runner-Up</div>
@@ -560,53 +573,6 @@
   </div>
 </section>
 
-<!-- ================= APP DESIGNS ================= -->
-<section class="app-designs">
-  <div class="wrap">
-    <p class="eyebrow">Mobile Work</p>
-    <h2>App Designs</h2>
-    <div class="app-grid">
-      
-      <!-- App 1: BarkCard -->
-      <div class="phone-mockup">
-        <div class="phone-frame">
-          <div class="phone-notch"></div>
-          <div class="phone-screen">
-            <div class="phone-screen-inner">
-              <img src="images/mobile_barkcard/Sign In Page.jpg" alt="BarkCard Sign In">
-              <img src="images/mobile_barkcard/User's Dashboard.jpg" alt="Dashboard">
-              <img src="images/mobile_barkcard/User's Transactions.jpg" alt="Transactions">
-              <img src="images/mobile_barkcard/iPhone 14 & 15 Pro - 2.jpg" alt="BarkCard App">
-            </div>
-          </div>
-        </div>
-        <div class="phone-label">BarkCard</div>
-      </div>
-
-      <!-- App 2: SJPS -->
-      <div class="phone-mockup">
-        <div class="phone-frame">
-          <div class="phone-notch"></div>
-          <div class="phone-screen">
-            <div class="phone-screen-inner">
-              <img src="images/mobile_sjps/Splash Screen (2).jpg" alt="Splash Screen">
-              <img src="images/mobile_sjps/Splash Screen (3).jpg" alt="Splash Screen 2">
-              <img src="images/mobile_sjps/Log In.jpg" alt="Login">
-              <img src="images/mobile_sjps/Verification.jpg" alt="Verification">
-              <img src="images/mobile_sjps/Main Dashboard.jpg" alt="Main Dashboard">
-              <img src="images/mobile_sjps/Frame 79.jpg" alt="SJPS Feature">
-              <img src="images/mobile_sjps/Logo.jpg" alt="SJPS Logo">
-            </div>
-          </div>
-        </div>
-        <div class="phone-label">SJPS</div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ================= FOOTER ================= -->
 <footer>
   <div class="wrap">
     <p class="eyebrow" style="color:var(--lime);">Let's connect</p>
@@ -626,43 +592,110 @@
 
 <script>
 
-  // ---- handle uploads ----
-  document.addEventListener('change', e=>{
-    if(e.target.matches('.slot input[type=file]')){
-      const file=e.target.files[0];
-      if(!file) return;
-      const slot=e.target.closest('.slot');
-      const url=URL.createObjectURL(file);
-      const oldImg=slot.querySelector('img');
-      if(oldImg) oldImg.remove();
-      const img=document.createElement('img');
-      img.src=url;
-      slot.appendChild(img);
-      slot.classList.add('filled');
-    }
-  });
-
-  // ---- remove image ----
-  document.addEventListener('click', e=>{
-    if(e.target.matches('.remove')){
-      e.preventDefault();
-      e.stopPropagation();
-      const slot=e.target.closest('.slot');
-      const img=slot.querySelector('img');
-      if(img) img.remove();
-      slot.classList.remove('filled');
-      slot.querySelector('input').value='';
-    }
-  });
-
   // ---- tabs ----
   document.querySelectorAll('.tab-btn').forEach(btn=>{
     btn.addEventListener('click', ()=>{
       document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-      document.querySelectorAll('.grid-cat').forEach(g=>g.classList.remove('active'));
+      document.querySelectorAll('.grid-cat, .app-designs-tab').forEach(g=>g.classList.remove('active'));
       btn.classList.add('active');
-      document.querySelector(`.grid-cat[data-cat="${btn.dataset.cat}"]`).classList.add('active');
+      const target = document.querySelector(`.grid-cat[data-cat="${btn.dataset.cat}"], .app-designs-tab[data-cat="${btn.dataset.cat}"]`);
+      if(target) target.classList.add('active');
     });
+  });
+
+  // ---- lightbox ----
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImage = document.getElementById('lightbox-image');
+  const lightboxThumbnails = document.getElementById('lightbox-thumbnails');
+  const lightboxClose = document.getElementById('lightbox-close');
+  const lightboxPrev = document.getElementById('lightbox-prev');
+  const lightboxNext = document.getElementById('lightbox-next');
+  
+  let currentApp = null;
+  let currentImages = [];
+  let currentIndex = 0;
+
+  const appImages = {
+    sjps: [
+      'images/mobile_sjps/Main Dashboard.jpg',
+      'images/mobile_sjps/Splash Screen (2).jpg',
+      'images/mobile_sjps/Splash Screen (3).jpg',
+      'images/mobile_sjps/Log In.jpg',
+      'images/mobile_sjps/Verification.jpg',
+      'images/mobile_sjps/Frame 79.jpg',
+      'images/mobile_sjps/Logo.jpg'
+    ],
+    barkcard: [
+      'images/mobile_barkcard/User\'s Dashboard.jpg',
+      'images/mobile_barkcard/Sign In Page.jpg',
+      'images/mobile_barkcard/User\'s Transactions.jpg',
+      'images/mobile_barkcard/iPhone 14 & 15 Pro - 2.jpg'
+    ]
+  };
+
+  function openLightbox(appName) {
+    currentApp = appName;
+    currentImages = appImages[appName];
+    currentIndex = 0;
+    
+    lightbox.classList.add('active');
+    updateLightboxImage();
+    renderThumbnails();
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('active');
+    currentApp = null;
+  }
+
+  function updateLightboxImage() {
+    lightboxImage.src = currentImages[currentIndex];
+    document.querySelectorAll('.lightbox-thumb').forEach((thumb, idx) => {
+      thumb.classList.toggle('active', idx === currentIndex);
+    });
+  }
+
+  function renderThumbnails() {
+    lightboxThumbnails.innerHTML = currentImages.map((img, idx) => 
+      `<div class="lightbox-thumb ${idx === currentIndex ? 'active' : ''}" data-index="${idx}">
+        <img src="${img}" alt="Thumbnail ${idx + 1}">
+      </div>`
+    ).join('');
+    
+    document.querySelectorAll('.lightbox-thumb').forEach(thumb => {
+      thumb.addEventListener('click', () => {
+        currentIndex = parseInt(thumb.dataset.index);
+        updateLightboxImage();
+      });
+    });
+  }
+
+  document.querySelectorAll('.app-entry-image').forEach(entry => {
+    entry.addEventListener('click', () => {
+      openLightbox(entry.dataset.app);
+    });
+  });
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => {
+    if(e.target === lightbox) closeLightbox();
+  });
+  
+  lightboxPrev.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+    updateLightboxImage();
+  });
+  
+  lightboxNext.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % currentImages.length;
+    updateLightboxImage();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if(!lightbox.classList.contains('active')) return;
+    if(e.key === 'Escape') closeLightbox();
+    if(e.key === 'ArrowLeft') lightboxPrev.click();
+    if(e.key === 'ArrowRight') lightboxNext.click();
   });
 </script>
 </body>
