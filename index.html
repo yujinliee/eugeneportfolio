@@ -277,16 +277,13 @@
   }
 
   .tile{
-    aspect-ratio:1/1;
-    border-radius:18px;
+    aspect-ratio:210/297;
     overflow:hidden;
-    background:#fff;
-    box-shadow:0 2px 8px rgba(0,0,0,0.06);
-    transition:transform .18s ease, box-shadow .18s ease;
+    transition:transform .18s ease;
     cursor:pointer;
   }
-  .tile:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,0.12);}
-  .tile img{width:100%;height:100%;object-fit:cover;display:block;}
+  .tile:hover{transform:translateY(-3px);}
+  .tile img{width:100%;height:100%;object-fit:contain;display:block;}
 
   /* App Designs Tab */
   .app-designs-tab{
@@ -611,33 +608,14 @@
     <p class="hint">Browse through my design work across different categories. Switch tabs to explore more.</p>
 
     <div class="tabs">
-      <button class="tab-btn active" data-cat="uiux">UI/UX DESIGNS</button>
-      <button class="tab-btn" data-cat="mockups">AI MOCKUPS</button>
-      <button class="tab-btn" data-cat="logo">LOGO & BRANDING</button>
-      <button class="tab-btn" data-cat="webdesigns">WEB DESIGNS</button>
+      <button class="tab-btn active" data-cat="webdesigns">WEB DESIGNS</button>
       <button class="tab-btn" data-cat="appdesigns">MOBILE DESIGNS</button>
+      <button class="tab-btn" data-cat="uiux">ADV DESIGNS</button>
+      <button class="tab-btn" data-cat="mockups">MOCKUPS</button>
+      <button class="tab-btn" data-cat="logo">LOGO & BRANDING</button>
     </div>
 
-    <div class="grid-cat active" data-cat="uiux">
-      <div class="tile"><img src="images/uiux/ad_1.jpg" alt="Advertising Design 1"></div>
-      <div class="tile"><img src="images/uiux/ad_2.jpg" alt="Advertising Design 2"></div>
-      <div class="tile"><img src="images/uiux/ad_3.jpg" alt="Advertising Design 3"></div>
-      <div class="tile"><img src="images/uiux/ad_4.jpg" alt="Advertising Design 4"></div>
-    </div>
-    <div class="grid-cat" data-cat="mockups">
-      <div class="tile"><img src="images/mockups/mockup_1.jpg" alt="Mockup 1"></div>
-      <div class="tile"><img src="images/mockups/mockup_2.jpg" alt="Mockup 2"></div>
-      <div class="tile"><img src="images/mockups/mockup_3.jpg" alt="Mockup 3"></div>
-      <div class="tile"><img src="images/mockups/mockup_4.jpg" alt="Mockup 4"></div>
-      <div class="tile"><img src="images/mockups/mockup_5.jpg" alt="Mockup 5"></div>
-      <div class="tile"><img src="images/mockups/mockup_6.jpg" alt="Mockup 6"></div>
-    </div>
-    <div class="grid-cat" data-cat="logo">
-      <div class="tile"><img src="images/logo/logo_1.jpg" alt="Logo 1"></div>
-      <div class="tile"><img src="images/logo/logo_2.jpg" alt="Logo 2"></div>
-      <div class="tile"><img src="images/logo/logo_3.jpg" alt="Logo 3"></div>
-    </div>
-    <div class="grid-cat" data-cat="webdesigns">
+    <div class="grid-cat active" data-cat="webdesigns">
       <div class="tile web-design-tile" data-full="images/website/web1.jpg"><img src="images/website/front_web1.png" alt="Website Design 1"></div>
       <div class="tile web-design-tile" data-full="images/website/web2.png"><img src="images/website/front_web2.png" alt="Website Design 2"></div>
       <div class="tile web-design-tile" data-full="images/website/web4.png"><img src="images/website/front_web4.png" alt="Website Design 4"></div>
@@ -665,6 +643,25 @@
           <p>A modern financial management app focused on simplifying transactions and expense tracking. The dashboard provides users with a clear overview of their financial activities, while the transaction history feature helps monitor spending patterns. Built with user experience and security in mind.</p>
         </div>
       </div>
+    </div>
+    <div class="grid-cat" data-cat="uiux">
+      <div class="tile"><img src="images/uiux/ad_1.jpg" alt="Advertising Design 1"></div>
+      <div class="tile"><img src="images/uiux/ad_2.jpg" alt="Advertising Design 2"></div>
+      <div class="tile"><img src="images/uiux/ad_3.jpg" alt="Advertising Design 3"></div>
+      <div class="tile"><img src="images/uiux/ad_4.jpg" alt="Advertising Design 4"></div>
+    </div>
+    <div class="grid-cat" data-cat="mockups">
+      <div class="tile"><img src="images/mockups/mockup_1.jpg" alt="Mockup 1"></div>
+      <div class="tile"><img src="images/mockups/mockup_2.jpg" alt="Mockup 2"></div>
+      <div class="tile"><img src="images/mockups/mockup_3.jpg" alt="Mockup 3"></div>
+      <div class="tile"><img src="images/mockups/mockup_4.jpg" alt="Mockup 4"></div>
+      <div class="tile"><img src="images/mockups/mockup_5.jpg" alt="Mockup 5"></div>
+      <div class="tile"><img src="images/mockups/mockup_6.jpg" alt="Mockup 6"></div>
+    </div>
+    <div class="grid-cat" data-cat="logo">
+      <div class="tile"><img src="images/logo/logo_1.jpg" alt="Logo 1"></div>
+      <div class="tile"><img src="images/logo/logo_2.jpg" alt="Logo 2"></div>
+      <div class="tile"><img src="images/logo/logo_3.jpg" alt="Logo 3"></div>
     </div>
   </div>
 </section>
